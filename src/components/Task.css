@@ -19,8 +19,9 @@
 
 .tasks__item__toggle--completed {
   text-decoration: line-through;
-  background-color: rgba(0, 128, 0, 0.15);
+  background-color: rgba(0, 128, 0, 0.421);
   border-color: rgba(0, 128, 0, 0.2);
+  color: red;
 }
 
 .tasks__item__toggle {
