@@ -1,0 +1,19 @@
+/* form {
+    display:block;
+    display: flex;
+    flex-direction: column;
+    border: 3px red solid;
+    width: 50vw;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+} */
+
+label, input {
+    display: flex;
+    flex-direction: column;
+    border: 1px dotted pink;
+    align-content: center;
+    justify-content:center;
+    width: 50%;
+}

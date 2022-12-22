@@ -3,7 +3,7 @@ import TaskList from './components/TaskList.js';
 import './App.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import NewTaskForm from './components/NewTaskForm.js';
 // const TASKS = [
 //   {
 //     id: 1,
@@ -22,7 +22,7 @@ const App = () => {
 
   const [tasksList, setTasksList] = useState([]);
 
-  useEffect(() => {
+  const fetchAllTasks = () => {
     axios
       .get(URL)
       .then((response) => {
@@ -40,7 +40,9 @@ const App = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  };
+
+  useEffect(fetchAllTasks, []);
 
   const updateComplete = (taskId, isComplete) => {
     console.log('update task called');
@@ -84,6 +86,25 @@ const App = () => {
       });
   };
 
+  const addTaskCallbackFunc = (newTaskInfo) => {
+    axios
+      .post(URL, newTaskInfo)
+      .then(() => {
+        fetchAllTasks();
+
+        const newTasks = [...tasksList];
+        const newTask = {
+          ...newTaskInfo,
+        };
+        newTasks.push(newTask);
+
+        setTasksList(newTasks);
+      })
+      .catch((error) => {
+        console.log('There was an error');
+        console.log(error);
+      });
+  };
   return (
     <div className="App">
       <header className="App-header">
@@ -96,6 +117,7 @@ const App = () => {
             updateComplete={updateComplete}
             deleteTask={deleteTask}
           />
+          <NewTaskForm addTask={addTaskCallbackFunc} />
         </div>
       </main>
     </div>
